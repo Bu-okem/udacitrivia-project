@@ -39,6 +39,45 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
 
+    def test_get_questions(self):
+        """Test _____________ """
+        res = self.client().get('/api/questions')
+
+        self.assertEqual(res.status_code, 200)
+        ''''''
+
+    def test_delete_question(self):
+        """Test _____________ """
+        res = self.client().delete('/api/questions/${id}')
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_add_question(self):
+        """Test _____________ """
+        res = self.client().post('/api/questions')
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_search_questions(self):
+        """Test _____________ """
+        res = self.client().post('/api/questions')
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_get_questions_category(self):
+        """Test _____________ """
+        res = self.client().get('/api/categories/${id}/questions')
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_post_quizzes(self):
+        """Test _____________ """
+        res = self.client().post('/api/quizzes')
+
+        self.assertEqual(res.status_code, 200)
+
+    
+
 
 
 # Make the tests conveniently executable
