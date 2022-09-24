@@ -51,6 +51,7 @@
   color: white;
   padding: 3px 5px;
   margin-left: 0px !important;
+  cursor: pointer;
 }
 
 span.page-num {
@@ -60,6 +61,7 @@ span.page-num {
   font-weight: bolder;
   text-decoration: underline;
   font-size: 16px;
+  cursor: pointer;
 }
 
 span.page-num.active {
@@ -68,8 +70,10 @@ span.page-num.active {
 
 img.category {
   width: 30px;
+  cursor: pointer;
 }
 
 img.delete {
   width: 20px;
+  cursor: pointer;
 }
