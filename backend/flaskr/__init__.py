@@ -92,7 +92,10 @@ def create_app(test_config=None):
         db.session.commit()
         db.session.close()
 
-        return jsonify({'success': True})
+        return jsonify({
+            'success': True,
+            'question_id': question_id
+            })
 
     """
     @TODO:
@@ -261,7 +264,7 @@ def create_app(test_config=None):
         return jsonify({
             "success": False,
             "error": 422,
-            "message": "Can't process request"
+            "message": "Unable to process request"
         }), 422
 
     return app
