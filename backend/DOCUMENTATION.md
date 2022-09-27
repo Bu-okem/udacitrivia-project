@@ -150,8 +150,8 @@ This is the API documentation for trivia applications.
 		Request Body:
 		
 		{
-		    'previous_questions': [1, 4, 20, 15]
-		    quiz_category': 'current category'
+		    'previous_questions': [1, 4, 20, 15],
+		    'quiz_category': 'current_category'
 		}
 		
 		Returns: a single new question object

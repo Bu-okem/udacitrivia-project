@@ -44,6 +44,36 @@ def create_app(test_config=None):
             })
 
 
+    @app.route('/api/categories', methods=['POST'])
+    def add_categories():
+
+        data = request.get_json()
+
+        type = data['type']
+
+        new_category = Category(type=type)
+
+        db.session.add(new_category)
+        db.session.commit()
+        db.session.close()
+
+        return jsonify({
+            'success': True
+        })
+
+    @app.route('/api/categories/<int:category_id>', methods=['DELETE'])
+    def delete_categories(category_id):
+
+        category = Category.query.filter_by(id=category_id).first()
+
+        db.session.delete(category)
+        db.session.commit()
+        db.session.close()
+
+        return jsonify({
+            'success': True,
+            'question_id': category_id
+            })
     """
     @TODO:
     Create an endpoint to handle GET requests for questions,
@@ -66,6 +96,8 @@ def create_app(test_config=None):
         questions = Question.query.order_by('id').all()
         categories = Category.query.all()
 
+        category_id = 0
+
         formatted_questions = [question.format() for question in questions]
         dict_categories = {category.id:str(category.type) for category in categories}
         return jsonify({
@@ -73,7 +105,7 @@ def create_app(test_config=None):
             'questions': formatted_questions[start:end],
             'total_questions': len(formatted_questions),
             'categories': dict_categories,
-            'currentCategory': categories[0].type
+            'currentCategory': 'All'
             })
 
     """
@@ -167,14 +199,14 @@ def create_app(test_config=None):
     category to be shown.
     """
 
-    @app.route('/api/categories/<int:category_id>/questions')
+    @app.route('/api/categories/<category_id>/questions')
     def get_category_questions(category_id):
 
         page = request.args.get('page', 1, type=int)
         start = (page - 1) * 10
         end = start + 10
 
-        questions = Question.query.filter_by(category=category_id).order_by('id').all()
+        questions = Question.query.filter_by(category=str(category_id)).order_by('id').all()
         category = Category.query.filter_by(id=category_id).first()
 
         formatted_questions = [question.format() for question in questions]
